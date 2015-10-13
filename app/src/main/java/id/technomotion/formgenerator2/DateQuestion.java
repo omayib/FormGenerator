@@ -19,16 +19,16 @@ import java.util.List;
  * Created by omayib on 13/10/15.
  */
 public class DateQuestion extends Question{
-    private TextView tvQuestion,tvCaption;
-    private EditText etAnswer;
+    private TextView tvQuestion;
+    private TextView tvCaption;
     private LinearLayout linearLayoutParent;
+    private LinearLayout linearLayoutDate;
     private Context context;
     private String answer;
     private EditText editTextDate;
     private EditText editTextMonth;
     private EditText editTextYear;
     private String selectedDate;
-    private LinearLayout.LayoutParams linearLayoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     private LinearLayout.LayoutParams paramsDefault=
             new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     private LinearLayout.LayoutParams buttonParams=
@@ -43,47 +43,55 @@ public class DateQuestion extends Question{
         super.build();
         this.context=getContext();
         this.linearLayoutParent=new LinearLayout(context);
+        this.linearLayoutDate=new LinearLayout(context);
 
-        editTextDate=new EditText(context);
-        editTextMonth=new EditText(context);
-        editTextYear=new EditText(context);
+        this.editTextDate=new EditText(context);
+        this.editTextMonth=new EditText(context);
+        this.editTextYear=new EditText(context);
+        this.tvCaption=new TextView(getContext());
+        this.tvQuestion=new TextView(getContext());
 
-        editTextDate.setLayoutParams(buttonParams);
-        editTextMonth.setLayoutParams(buttonParams);
-        editTextYear.setLayoutParams(buttonParams);
-        editTextMonth.setInputType(EditorInfo.TYPE_NULL);
-        editTextDate.setInputType(EditorInfo.TYPE_NULL);
-        editTextYear.setInputType(EditorInfo.TYPE_NULL);
-        this.linearLayoutParent.setOrientation(LinearLayout.HORIZONTAL);
+        this.editTextDate.setLayoutParams(buttonParams);
+        this.editTextMonth.setLayoutParams(buttonParams);
+        this.editTextYear.setLayoutParams(buttonParams);
+        this.editTextMonth.setInputType(EditorInfo.TYPE_NULL);
+        this.editTextDate.setInputType(EditorInfo.TYPE_NULL);
+        this.editTextYear.setInputType(EditorInfo.TYPE_NULL);
+        this.linearLayoutParent.setOrientation(LinearLayout.VERTICAL);
         this.linearLayoutParent.setLayoutParams(paramsDefault);
-        this.linearLayoutParent.setFocusable(true);
-
-        this.linearLayoutParent.addView(editTextDate);
-        this.linearLayoutParent.addView(editTextMonth);
-        this.linearLayoutParent.addView(editTextYear);
-        editTextDate.setOnClickListener(new View.OnClickListener() {
+        this.linearLayoutDate.setOrientation(LinearLayout.HORIZONTAL);
+        this.linearLayoutDate.setLayoutParams(paramsDefault);
+        this.linearLayoutDate.setFocusable(true);
+        this.editTextDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("clicked");
                 datePickerShow();
             }
         });
-        editTextMonth.setOnClickListener(new View.OnClickListener() {
+        this.editTextMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("clicked");
                 datePickerShow();
 
             }
         });
-        editTextYear.setOnClickListener(new View.OnClickListener() {
+        this.editTextYear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("clicked");
                 datePickerShow();
 
             }
         });
+
+        this.tvQuestion.setText(getQuestion());
+        this.tvCaption.setText(getCaption());
+
+        this.linearLayoutDate.addView(editTextDate);
+        this.linearLayoutDate.addView(editTextMonth);
+        this.linearLayoutDate.addView(editTextYear);
+        this.linearLayoutParent.addView(tvQuestion);
+        this.linearLayoutParent.addView(tvCaption);
+        this.linearLayoutParent.addView(linearLayoutDate);
     }
 
 
@@ -107,8 +115,8 @@ public class DateQuestion extends Question{
     }
     private void updateField(String selectedDate) {
         String[] dateParsed=selectedDate.split("-");
-        editTextDate.setText(dateParsed[0]);
-        editTextMonth.setText(dateParsed[1]);
-        editTextYear.setText(dateParsed[2]);
+        this.editTextDate.setText(dateParsed[0]);
+        this.editTextMonth.setText(dateParsed[1]);
+        this.editTextYear.setText(dateParsed[2]);
     }
 }

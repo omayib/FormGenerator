@@ -25,13 +25,17 @@ public class CurrencyQuestion extends Question {
     @Override
     public void build() {
         super.build();
+        this.linearLayoutParent=new LinearLayout(getContext());
         this.editText=new EditText(getContext());
         this.tvCaption=new TextView(getContext());
         this.tvQuestion=new TextView(getContext());
 
-        paramsDefault.setMargins(0,8,0,8);
-        editText.setLayoutParams(paramsDefault);
-        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+        this.linearLayoutParent.setOrientation(LinearLayout.VERTICAL);
+        this.paramsDefault.setMargins(0,8,0,8);
+        this.editText.setLayoutParams(paramsDefault);
+        this.editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+        this.tvCaption.setText(getCaption());
+        this.tvQuestion.setText(getQuestion());
 
         this.linearLayoutParent.addView(tvQuestion);
         this.linearLayoutParent.addView(tvCaption);
