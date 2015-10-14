@@ -72,7 +72,8 @@ public class MainActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    ultimateForm.getResponse();
+                   String answer= ultimateForm.getResponse();
+                System.out.println("answer "+answer);
             }
         });
 

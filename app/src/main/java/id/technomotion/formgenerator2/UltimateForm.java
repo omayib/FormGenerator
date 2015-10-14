@@ -46,7 +46,9 @@ public class UltimateForm {
                                         arrResponses.put(single);
                                     }
                                 }else{
-                                    arrResponses.put(formComposite.getAnswer().get(0));
+                                    if(!formComposite.getAnswer().get(0).isEmpty()){
+                                        arrResponses.put(formComposite.getAnswer().get(0));
+                                    }
                                 }
                             }
                         }

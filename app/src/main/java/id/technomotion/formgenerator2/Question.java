@@ -45,6 +45,7 @@ public class Question extends Form {
         return formComposite.get(key);
 
     }
+
     public Context getContext() {
         return context;
     }
@@ -77,13 +78,11 @@ public class Question extends Form {
     @Override
     public void addComposite(String parent, Form form) {
         super.addComposite(parent, form);
-        System.out.println("add composite key :"+parent);
         formComposite.put(parent, form);
     }
 
     @Override
     public Iterator iterator() {
-        System.out.println("QUESTION Iterator");
         return new QuestionIterator(forms);
     }
 
