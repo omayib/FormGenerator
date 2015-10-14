@@ -8,6 +8,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,12 +17,12 @@ import java.util.List;
 public class RectangleRadioGroupQuestion extends Question {
     private static final String TAG=RectangleRadioGroupQuestion.class.getName();
     private TextView tvQuestion,tvCaption;
+    private List<String> listAnswer=new ArrayList<>();
     private LinearLayout linearLayoutView;
     private LinearLayout.LayoutParams linearLayoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
     private RadioGroup radioGroup;
     private Context context;
-    private String answer;
     public RectangleRadioGroupQuestion(String question, String caption,
                                        String hint, List<String> options,
                                        List<String> responses, int type) {
@@ -53,8 +54,11 @@ public class RectangleRadioGroupQuestion extends Question {
                 if(i<0)return;
                 RadioButton checkedRadioButton = (RadioButton) radioGroup.findViewById(i);
                 String checked = checkedRadioButton.getText().toString();
-                answer=checked;
+                listAnswer.clear();
+                listAnswer.add(checked);
                 insertComposite(checked);
+
+                System.out.println(TAG+" list answer : "+listAnswer.toString());
             }
         });
         this.tvQuestion.setText(getQuestion());
@@ -90,15 +94,20 @@ public class RectangleRadioGroupQuestion extends Question {
     }
 
     private void reloadAnswer() {
-        if(answer!=null){
+        if(!listAnswer.isEmpty()){
             for(int i=0;i<radioGroup.getChildCount();i++){
                 RadioButton radioButton= (RadioButton) radioGroup.getChildAt(i);
-                if(radioButton.getText().toString().equalsIgnoreCase(answer)){
+                if(radioButton.getText().toString().equalsIgnoreCase(listAnswer.get(0).toString())){
                     radioButton.setChecked(true);
-                    answer=radioButton.getText().toString();
+                    listAnswer.clear();
+                    listAnswer.add(radioButton.getText().toString());
                 }
             }
         }
     }
 
+    @Override
+    public List<String> getAnswer() {
+        return listAnswer;
+    }
 }

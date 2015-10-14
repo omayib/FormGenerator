@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -24,7 +25,7 @@ public class DateQuestion extends Question{
     private LinearLayout linearLayoutParent;
     private LinearLayout linearLayoutDate;
     private Context context;
-    private String answer;
+    private List<String> listAnswer=new ArrayList<>();
     private EditText editTextDate;
     private EditText editTextMonth;
     private EditText editTextYear;
@@ -118,5 +119,12 @@ public class DateQuestion extends Question{
         this.editTextDate.setText(dateParsed[0]);
         this.editTextMonth.setText(dateParsed[1]);
         this.editTextYear.setText(dateParsed[2]);
+        this.listAnswer.clear();
+        this.listAnswer.add(selectedDate);
+    }
+
+    @Override
+    public List<String> getAnswer() {
+        return listAnswer;
     }
 }

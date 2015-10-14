@@ -7,6 +7,7 @@ import java.util.List;
  * Created by omayib on 10/10/15.
  */
 public class QuestionIterator implements Iterator {
+    private static final String TAG=QuestionIterator.class.getName();
     private List<Form> forms;
     private int location=0;
 
@@ -16,12 +17,13 @@ public class QuestionIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
+        System.out.println("ITERATOR hasnext");
         return forms.iterator().hasNext();
     }
 
     @Override
     public Form next() {
-        return forms.get(location++);
+        return null;
     }
 
     @Override

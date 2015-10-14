@@ -29,7 +29,7 @@ public class FormFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         System.out.println("oncreate view");
-        formPage= (FormPage) getArguments().getParcelable("form_page");
+        formPage= getArguments().getParcelable("form_page");
         return formPage.getView();
     }
 
@@ -39,9 +39,6 @@ public class FormFragment extends Fragment {
         super.onDestroyView();
     }
 
-    public String pullAnswer(){
-        return formPage.getAnswer();
-    }
 
 
 

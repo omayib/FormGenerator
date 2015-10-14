@@ -69,6 +69,11 @@ public class Question extends Form {
         return type;
     }
 
+
+    public List<String> getResponses() {
+        return responses;
+    }
+
     @Override
     public void addComposite(String parent, Form form) {
         super.addComposite(parent, form);
@@ -78,7 +83,18 @@ public class Question extends Form {
 
     @Override
     public Iterator iterator() {
+        System.out.println("QUESTION Iterator");
         return new QuestionIterator(forms);
+    }
+
+    @Override
+    public boolean hasComposite() {
+        return formComposite.size()>0;
+    }
+
+    @Override
+    public Map<String, Form> getComposites() {
+        return formComposite;
     }
 
     @Override

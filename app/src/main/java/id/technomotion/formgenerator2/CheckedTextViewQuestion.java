@@ -45,7 +45,7 @@ public class CheckedTextViewQuestion extends Question {
         this.tvCaption.setText(getCaption());
         this.tvQuestion.setText(getQuestion());
 
-        ListView listView=new ListView(getContext());
+        final ListView listView=new ListView(getContext());
         listView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
         List<String> pilihan=new ArrayList<>();
         pilihan.addAll(getOptions());
@@ -54,7 +54,6 @@ public class CheckedTextViewQuestion extends Question {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 CheckedTextView checkedTextView = (CheckedTextView) view;
                 String checked = checkedTextView.getText().toString();
-                System.out.println("checked " + checked);
                 if (checkedTextView.isChecked()) {
                     if (!listAnswer.contains(checked)) {
                         listAnswer.add(checked);
@@ -78,4 +77,10 @@ public class CheckedTextViewQuestion extends Question {
     public View getView() {
         return linearLayoutParent;
     }
+
+    @Override
+    public List<String> getAnswer() {
+        return listAnswer;
+    }
+
 }

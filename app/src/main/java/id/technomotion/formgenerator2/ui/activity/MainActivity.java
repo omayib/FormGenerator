@@ -3,6 +3,7 @@ package id.technomotion.formgenerator2.ui.activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 
 import org.json.JSONArray;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         btnPrev= (Button) findViewById(R.id.buttonPrev);
 
 
-        UltimateForm ultimateForm=new UltimateForm();
+        final UltimateForm ultimateForm=new UltimateForm();
         try {
             JSONObject objBrief=new JSONObject(SampleTypeComplete.SCHEMA);
             JSONArray arrBrief=objBrief.getJSONArray("brief");
@@ -68,7 +69,12 @@ public class MainActivity extends AppCompatActivity {
         adapter=new FragmentViewPagerAdapter(this,getSupportFragmentManager(),ultimateForm.getFormPageList());
         viewPager.setAdapter(adapter);
 
-
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    ultimateForm.getResponse();
+            }
+        });
 
 //        setContentView(ultimateForm.getFormPageList().get(0).getView());
     }

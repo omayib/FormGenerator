@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class SimpleTextQuestion extends Question {
     private EditText etAnswer;
     private LinearLayout linearLayoutView;
     private Context context;
-    private String answer;
+    private List<String> listAnswer=new ArrayList<>();
     private LinearLayout.LayoutParams linearLayoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
     public SimpleTextQuestion(String question, String caption,
@@ -33,21 +34,14 @@ public class SimpleTextQuestion extends Question {
     @Override
     public void build() {
         super.build();
-        this.context=getContext();
-        this.linearLayoutView= new LinearLayout(this.context);
-        this.tvCaption=new TextView(this.context);
-        this.tvQuestion=new TextView(this.context);
-        this.etAnswer=new EditText(this.context);
+        this.linearLayoutView= new LinearLayout(getContext());
+        this.tvCaption=new TextView(getContext());
+        this.tvQuestion=new TextView(getContext());
+        this.etAnswer=new EditText(getContext());
 
         this.linearLayoutView.setOrientation(LinearLayout.VERTICAL);
         this.linearLayoutView.setLayoutParams(linearLayoutParams);
-        this.linearLayoutView.addView(tvQuestion);
-        this.linearLayoutView.addView(tvCaption);
-        this.linearLayoutView.addView(etAnswer);
         this.etAnswer.setLayoutParams(linearLayoutParams);
-        this.etAnswer.setText(getAnswer());
-        this.tvQuestion.setText(getQuestion());
-        this.tvCaption.setText(getCaption());
         this.etAnswer.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -61,9 +55,18 @@ public class SimpleTextQuestion extends Question {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                answer=editable.toString();
+                listAnswer.clear();
+                listAnswer.add(editable.toString());
             }
         });
+
+        this.tvQuestion.setText(getQuestion());
+        this.tvCaption.setText(getCaption());
+        this.etAnswer.setText(getAnswer().isEmpty()?"":getAnswer().get(0));
+
+        this.linearLayoutView.addView(tvQuestion);
+        this.linearLayoutView.addView(tvCaption);
+        this.linearLayoutView.addView(etAnswer);
     }
 
     @Override
@@ -78,14 +81,12 @@ public class SimpleTextQuestion extends Question {
     }
 
     private void reloadAnswer() {
-        if(answer!=null)
-            this.etAnswer.setText(answer);
+        if(listAnswer!=null)
+            this.etAnswer.setText(listAnswer.get(0));
     }
 
     @Override
-    public String getAnswer() {
-        return this.etAnswer.getText().toString();
+    public List<String> getAnswer() {
+        return listAnswer;
     }
-
-
 }

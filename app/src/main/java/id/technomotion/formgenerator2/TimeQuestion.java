@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
@@ -19,6 +20,7 @@ import java.util.List;
 public class TimeQuestion extends Question {
     private LinearLayout linearLayoutParent;
     private EditText editTextTime;
+    private TextView tvQuestion,tvCaption;
     private String selectedTime;
     private LinearLayout.LayoutParams paramsDefault=
             new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -33,23 +35,29 @@ public class TimeQuestion extends Question {
     public void build() {
         super.build();
         this.linearLayoutParent=new LinearLayout(getContext());
+        this.editTextTime=new EditText(getContext());
+        this.tvCaption=new TextView(getContext());
+        this.tvQuestion=new TextView(getContext());
 
-        editTextTime=new EditText(getContext());
-
-        editTextTime.setLayoutParams(buttonParams);
-        editTextTime.setInputType(EditorInfo.TYPE_NULL);
-        this.linearLayoutParent.setOrientation(LinearLayout.HORIZONTAL);
+        this.editTextTime.setLayoutParams(buttonParams);
+        this.editTextTime.setInputType(EditorInfo.TYPE_NULL);
+        this.linearLayoutParent.setOrientation(LinearLayout.VERTICAL);
         this.linearLayoutParent.setLayoutParams(paramsDefault);
         this.linearLayoutParent.setFocusable(true);
-
-        this.linearLayoutParent.addView(editTextTime);
-        editTextTime.setOnClickListener(new View.OnClickListener() {
+        this.editTextTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("clicked");
                 timePickerShow();
             }
         });
+
+        this.tvCaption.setText(getCaption());
+        this.tvQuestion.setText(getQuestion());
+        this.editTextTime.setText(getAnswer().isEmpty()?"":getAnswer().get(0));
+
+        this.linearLayoutParent.addView(this.tvQuestion);
+        this.linearLayoutParent.addView(this.tvCaption);
+        this.linearLayoutParent.addView(this.editTextTime);
     }
     private void timePickerShow(){
 
