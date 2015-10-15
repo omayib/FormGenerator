@@ -19,8 +19,9 @@ public abstract class Form  implements Parcelable {
     public void removeComposite(String key){}
     public void addQuestion(Form form){}
     public void print() {}
-    public int getId(){return -1;}
+    public void setComposite(boolean hasComposite){}
 
+    public int getId(){return -1;}
     public boolean hasComposite(){return false;}
     public Map<String,Form> getComposites(){return null;}
     public Iterator iterator(){return null;}

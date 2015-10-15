@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by omayib on 10/10/15.
@@ -57,6 +58,34 @@ public class FormPage extends Form implements Parcelable {
         }
     }
 
+    public boolean currentFormHasEmpptyField(){
+        for (Form form:getForms()) {
+            System.out.println("size answer form question :"+form.getAnswer().size());
+            if(form.getAnswer().isEmpty()){
+                return true;
+            }else{
+                for(String s:form.getAnswer()){
+                    if(s.isEmpty())
+                        return true;
+                }
+            }
+            System.out.println("STATUS HAS COMPOSITE:"+form.hasComposite());
+            if(form.hasComposite()){
+                for(Map.Entry<String,Form> formCompList:form.getComposites().entrySet()){
+                    Form formComp=formCompList.getValue();
+                    if(formComp.getAnswer().isEmpty()){
+                        return true;
+                    }else{
+                        for(String s:form.getAnswer()){
+                            if(s.isEmpty())
+                                return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
 
     protected FormPage(Parcel in) {

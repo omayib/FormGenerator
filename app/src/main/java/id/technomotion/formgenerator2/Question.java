@@ -23,7 +23,7 @@ public class Question extends Form {
     private List<Form> forms=new ArrayList<>();
     private Map<String,Form> formComposite=new HashMap<>();
     private Context context;
-
+    private boolean hasComposite;
     public Question(String question, String caption,
                     String hint, List<String> options,
                     List<String> responses, int type) {
@@ -88,7 +88,13 @@ public class Question extends Form {
 
     @Override
     public boolean hasComposite() {
-        return formComposite.size()>0;
+        return hasComposite;
+    }
+
+    @Override
+    public void setComposite(boolean hasComposite) {
+        super.setComposite(hasComposite);
+        this.hasComposite=hasComposite;
     }
 
     @Override

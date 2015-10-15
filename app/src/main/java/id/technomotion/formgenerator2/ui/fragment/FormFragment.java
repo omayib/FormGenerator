@@ -34,6 +34,10 @@ public class FormFragment extends Fragment {
     }
 
 
+    public boolean hasEmptyField(){
+        return formPage.currentFormHasEmpptyField();
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

@@ -56,7 +56,7 @@ public class RectangleRadioGroupQuestion extends Question {
                 String checked = checkedRadioButton.getText().toString();
                 listAnswer.clear();
                 listAnswer.add(checked);
-                insertComposite(checked);
+                showComposite(checked);
 
                 System.out.println(TAG+" list answer : "+listAnswer.toString());
             }
@@ -69,8 +69,9 @@ public class RectangleRadioGroupQuestion extends Question {
         linearLayoutView.addView(this.radioGroup);
     }
 
-    private void insertComposite(String s) {
-        System.out.println("insertComposite "+s);
+    private void showComposite(String s) {
+        System.out.println("showComposite "+s);
+        setComposite(false);
         Form formComposite=getFormCompositeByKey(s);
         View view=null;
         if(formComposite!=null){
@@ -82,8 +83,10 @@ public class RectangleRadioGroupQuestion extends Question {
             System.out.println("remove");
         }
 
-        if(view!=null)
+        if(view!=null){
             linearLayoutView.addView(view);
+            setComposite(true);
+        }
     }
 
     @Override

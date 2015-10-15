@@ -35,7 +35,9 @@ public class UltimateForm {
                             arrResponses.put(single);
                         }
                     }else{
-                        arrResponses.put(form.getAnswer().get(0));
+                        if(!form.getAnswer().isEmpty()){
+                            arrResponses.put(form.getAnswer().get(0));
+                        }
                     }
                     if(form.hasComposite()){
                         for(Map.Entry<String,Form> entry:form.getComposites().entrySet()){
@@ -45,8 +47,8 @@ public class UltimateForm {
                                     for (String single:form.getAnswer()) {
                                         arrResponses.put(single);
                                     }
-                                }else{
-                                    if(!formComposite.getAnswer().get(0).isEmpty()){
+                                } else {
+                                    if(!formComposite.getAnswer().isEmpty()){
                                         arrResponses.put(formComposite.getAnswer().get(0));
                                     }
                                 }
