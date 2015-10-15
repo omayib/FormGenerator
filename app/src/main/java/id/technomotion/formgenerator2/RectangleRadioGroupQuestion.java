@@ -58,7 +58,6 @@ public class RectangleRadioGroupQuestion extends Question {
                 listAnswer.add(checked);
                 showComposite(checked);
 
-                System.out.println(TAG+" list answer : "+listAnswer.toString());
             }
         });
         this.tvQuestion.setText(getQuestion());
@@ -70,7 +69,6 @@ public class RectangleRadioGroupQuestion extends Question {
     }
 
     private void showComposite(String s) {
-        System.out.println("showComposite "+s);
         setComposite(false);
         Form formComposite=getFormCompositeByKey(s);
         View view=null;
@@ -80,7 +78,6 @@ public class RectangleRadioGroupQuestion extends Question {
         }
         if(linearLayoutView.findViewWithTag("composite")!=null){
             linearLayoutView.removeView(linearLayoutView.findViewWithTag("composite"));
-            System.out.println("remove");
         }
 
         if(view!=null){
@@ -92,7 +89,6 @@ public class RectangleRadioGroupQuestion extends Question {
 
     @Override
     public View getView() {
-        System.out.println(TAG+" getview");
         reloadAnswer();
         return linearLayoutView;
     }
@@ -112,7 +108,6 @@ public class RectangleRadioGroupQuestion extends Question {
 
     @Override
     public List<String> getAnswer() {
-        System.out.println(TAG+" list answer from getAnswer : "+listAnswer.toString());
         return listAnswer;
     }
 }

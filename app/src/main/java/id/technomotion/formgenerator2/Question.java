@@ -42,12 +42,10 @@ public class Question extends Form {
         this.context=context;
     }
     public Form getFormCompositeByKey(String key){
-        System.out.println("getFormCompositeByKey : "+formComposite.toString());
         return formComposite.get(key);
     }
 
     public void setFormCompositeActive(Form form){
-        System.out.println("set composite active [answer] "+form.getAnswer().toString());
         this.formCompositeActive=form;
     }
 
@@ -104,7 +102,6 @@ public class Question extends Form {
     @Override
     public void setComposite(boolean hasComposite) {
         super.setComposite(hasComposite);
-        System.out.println("set composite "+hasComposite);
         this.hasComposite=hasComposite;
     }
 

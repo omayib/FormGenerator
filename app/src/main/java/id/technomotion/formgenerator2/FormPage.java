@@ -59,7 +59,6 @@ public class FormPage extends Form implements Parcelable {
 
     public boolean currentFormHasEmpptyField(){
         for (Form form:getForms()) {
-            System.out.println("size answer form question :"+form.getAnswer().size());
             if(form.getAnswer().isEmpty()){
                 return true;
             }else{
@@ -68,10 +67,8 @@ public class FormPage extends Form implements Parcelable {
                         return true;
                 }
             }
-            System.out.println("STATUS HAS COMPOSITE:"+form.hasComposite());
             if(form.hasComposite()){
                 Form formComp=form.getFormCompositeActive();
-                System.out.println("size answer form question :"+formComp.getAnswer().size());
                 if(formComp.getAnswer().isEmpty()){
                     return true;
                 }else{
