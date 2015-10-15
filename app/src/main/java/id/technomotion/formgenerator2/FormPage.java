@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
 
 /**
  * Created by omayib on 10/10/15.
@@ -71,15 +70,14 @@ public class FormPage extends Form implements Parcelable {
             }
             System.out.println("STATUS HAS COMPOSITE:"+form.hasComposite());
             if(form.hasComposite()){
-                for(Map.Entry<String,Form> formCompList:form.getComposites().entrySet()){
-                    Form formComp=formCompList.getValue();
-                    if(formComp.getAnswer().isEmpty()){
-                        return true;
-                    }else{
-                        for(String s:form.getAnswer()){
-                            if(s.isEmpty())
-                                return true;
-                        }
+                Form formComp=form.getFormCompositeActive();
+                System.out.println("size answer form question :"+formComp.getAnswer().size());
+                if(formComp.getAnswer().isEmpty()){
+                    return true;
+                }else{
+                    for(String s:formComp.getAnswer()){
+                        if(s.isEmpty())
+                            return true;
                     }
                 }
             }

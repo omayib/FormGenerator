@@ -22,6 +22,7 @@ public class Question extends Form {
     private final int type;
     private List<Form> forms=new ArrayList<>();
     private Map<String,Form> formComposite=new HashMap<>();
+    private Form formCompositeActive;
     private Context context;
     private boolean hasComposite;
     public Question(String question, String caption,
@@ -43,7 +44,16 @@ public class Question extends Form {
     public Form getFormCompositeByKey(String key){
         System.out.println("getFormCompositeByKey : "+formComposite.toString());
         return formComposite.get(key);
+    }
 
+    public void setFormCompositeActive(Form form){
+        System.out.println("set composite active [answer] "+form.getAnswer().toString());
+        this.formCompositeActive=form;
+    }
+
+    @Override
+    public Form getFormCompositeActive() {
+        return formCompositeActive;
     }
 
     public Context getContext() {
@@ -94,6 +104,7 @@ public class Question extends Form {
     @Override
     public void setComposite(boolean hasComposite) {
         super.setComposite(hasComposite);
+        System.out.println("set composite "+hasComposite);
         this.hasComposite=hasComposite;
     }
 

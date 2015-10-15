@@ -20,6 +20,7 @@ public abstract class Form  implements Parcelable {
     public void addQuestion(Form form){}
     public void print() {}
     public void setComposite(boolean hasComposite){}
+    public Form getFormCompositeActive(){return null;}
 
     public int getId(){return -1;}
     public boolean hasComposite(){return false;}

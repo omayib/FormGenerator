@@ -86,6 +86,7 @@ public class RectangleRadioGroupQuestion extends Question {
         if(view!=null){
             linearLayoutView.addView(view);
             setComposite(true);
+            setFormCompositeActive(formComposite);
         }
     }
 
@@ -111,6 +112,7 @@ public class RectangleRadioGroupQuestion extends Question {
 
     @Override
     public List<String> getAnswer() {
+        System.out.println(TAG+" list answer from getAnswer : "+listAnswer.toString());
         return listAnswer;
     }
 }
