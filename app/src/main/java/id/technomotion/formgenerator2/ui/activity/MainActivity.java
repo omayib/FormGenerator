@@ -7,15 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.List;
-
-import id.technomotion.formgenerator2.FormPage;
-import id.technomotion.formgenerator2.Question;
-import id.technomotion.formgenerator2.QuestionGenerator;
 import id.technomotion.formgenerator2.R;
 import id.technomotion.formgenerator2.UltimateForm;
 import id.technomotion.formgenerator2.sample.SampleTypeComplete;
@@ -39,26 +30,8 @@ public class MainActivity extends AppCompatActivity {
         btnPrev= (Button) findViewById(R.id.buttonPrev);
 
 
-        final UltimateForm ultimateForm=new UltimateForm();
-        try {
-            JSONObject objBrief=new JSONObject(SampleTypeComplete.SCHEMA);
-            JSONArray arrBrief=objBrief.getJSONArray("brief");
-            for(int i=0;i<arrBrief.length();i++){
-                JSONObject objData=arrBrief.getJSONObject(i);
-                JSONArray arrData=objData.getJSONArray("data");
-
-                FormPage formPage=new FormPage(this);
-                List<Question> questions= QuestionGenerator.build(this, arrData.toString());
-                for (Question q:questions) {
-                    formPage.addQuestion(q);
-                }
-
-                ultimateForm.setFormPageList(formPage);
-
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        final UltimateForm ultimateForm=new UltimateForm(this);
+        ultimateForm.buildFromResource(SampleTypeComplete.SCHEMA);
 
         adapter=new FragmentViewPagerAdapter(this,getSupportFragmentManager(),ultimateForm.getFormPageList());
         viewPager.setAdapter(adapter);
