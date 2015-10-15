@@ -6,7 +6,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by omayib on 13/10/15.
@@ -40,17 +39,15 @@ public class UltimateForm {
                         }
                     }
                     if(form.hasComposite()){
-                        for(Map.Entry<String,Form> entry:form.getComposites().entrySet()){
-                            Form formComposite= entry.getValue();
-                            if(!formComposite.getAnswer().isEmpty() ){
-                                if(formComposite.getAnswer().size()>1){
-                                    for (String single:form.getAnswer()) {
-                                        arrResponses.put(single);
-                                    }
-                                } else {
-                                    if(!formComposite.getAnswer().isEmpty()){
-                                        arrResponses.put(formComposite.getAnswer().get(0));
-                                    }
+                        Form formComposite=form.getFormCompositeActive();
+                        if(!formComposite.getAnswer().isEmpty() ){
+                            if(formComposite.getAnswer().size()>1){
+                                for (String single:form.getAnswer()) {
+                                    arrResponses.put(single);
+                                }
+                            } else {
+                                if(!formComposite.getAnswer().isEmpty()){
+                                    arrResponses.put(formComposite.getAnswer().get(0));
                                 }
                             }
                         }
